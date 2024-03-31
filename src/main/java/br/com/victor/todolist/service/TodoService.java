@@ -14,14 +14,13 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
     public List<Todo> create(Todo todo) {
-        todoRepository.save(null);
+        todoRepository.save(todo);
         return list();
     }
     public List<Todo> list() {
-        Sort.by("priority").descending().and(
-                Sort.by("name").ascending()
-        );
-        return todoRepository.findAll();
+        Sort sort = Sort.by("priority").descending().and(
+          Sort.by("name").ascending());
+        return todoRepository.findAll(sort);
     }
     public List<Todo> update(Todo todo) {
         todoRepository.save(todo);
